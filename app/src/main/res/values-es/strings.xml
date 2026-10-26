@@ -205,4 +205,18 @@
     <string name="restore_notice">La restauración reemplaza el diseño y las preferencias. Puedes deshacerla hasta el siguiente cambio. No incluye fotos ni permisos de vídeo; restaurar el fondo puede activar la reproducción opcional de vídeos aéreos en línea.</string>
     <string name="restore_keep_wallpaper">Mantener el fondo actual de este televisor</string>
     <string name="restore_apply">Restaurar ajustes</string>
+    <string name="profiles_title">Perfiles</string>
+    <string name="profiles_sub">Favoritos, fondo y diseño personales</string>
+    <string name="profiles_notice">Las cuentas de Google y de streaming siguen compartidas.</string>
+    <string name="profile_home">Inicio</string>
+    <string name="profile_action_failed">No se pudieron cambiar los perfiles. Se conservan los ajustes.</string>
+    <string name="profile_add">Añadir perfil</string>
+    <string name="profile_rename">Renombrar perfil actual</string>
+    <string name="profile_delete_named">Eliminar %1$s</string>
+    <string name="profile_delete_notice">Solo se eliminarán este perfil y sus preferencias. Las apps y los demás perfiles seguirán en el televisor.</string>
+    <string name="profile_name">Nombre del perfil</string>
+    <string name="profile_name_invalid">Usa otro nombre de hasta 32 caracteres.</string>
+    <string name="profile_copy_notice">Copia el perfil actual. Selecciónalo en la lista cuando esté listo.</string>
+    <string name="profile_easy">Vista fácil: iconos grandes, etiquetas y más espacio</string>
+    <string name="profile_delete">Eliminar perfil</string>
 </resources>

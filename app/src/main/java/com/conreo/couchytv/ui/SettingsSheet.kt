@@ -86,7 +86,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 
-private enum class SettingsScreen { Main, Wallpaper, Display, StatusBar, Apps, Categories, Launcher, About }
+private enum class SettingsScreen { Main, Wallpaper, Display, StatusBar, Apps, Categories, Profiles, Launcher, About }
 
 /**
  * Settings panel built entirely from focusable rows and buttons — every
@@ -96,6 +96,7 @@ private enum class SettingsScreen { Main, Wallpaper, Display, StatusBar, Apps, C
 @Composable
 fun SettingsSheet(
     config: LauncherConfig,
+    activeProfileId: String,
     apps: List<AppEntry>,
     store: ConfigStore,
     onDismiss: () -> Unit,
@@ -105,6 +106,7 @@ fun SettingsSheet(
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     var screen by remember { mutableStateOf(SettingsScreen.Main) }
+    var mediaOwner by androidx.compose.runtime.saveable.rememberSaveable { mutableStateOf(activeProfileId) }
 
     // Same document-picker flow as videos: opens the system file manager,
     // works with USB drives and network storage providers.
@@ -113,21 +115,23 @@ fun SettingsSheet(
     ) { uri ->
         if (uri != null) {
             scope.launch {
-                withContext(Dispatchers.IO) {
-                    context.contentResolver.openInputStream(uri)?.use { input ->
-                        File(context.filesDir, "wallpaper.jpg").outputStream().use { out ->
-                            input.copyTo(out)
+                val owner = mediaOwner
+                val photoId = java.util.UUID.randomUUID().toString()
+                val file = File(context.filesDir, "wallpaper-$photoId.jpg")
+                runCatching {
+                    withContext(Dispatchers.IO) {
+                        requireNotNull(context.contentResolver.openInputStream(uri)).use { input ->
+                            file.outputStream().use { out -> input.copyTo(out) }
                         }
                     }
+                    store.update(expectedProfileId = owner) {
+                        it.copy(photoId = photoId, useCustomWallpaper = true, useVideoWallpaper = false, useBuiltinAerials = false)
+                    }
+                }.onSuccess { onWallpaperChanged() }.onFailure {
+                    if (it is kotlinx.coroutines.CancellationException) throw it
+                    file.delete()
+                    Actions.toast(context, context.getString(R.string.profile_action_failed))
                 }
-                store.update {
-                    it.copy(
-                        useCustomWallpaper = true,
-                        useVideoWallpaper = false,
-                        useBuiltinAerials = false,
-                    )
-                }
-                onWallpaperChanged()
             }
         }
     }
@@ -144,14 +148,14 @@ fun SettingsSheet(
                 )
             }
             scope.launch {
-                store.update {
+                runCatching { store.update(expectedProfileId = mediaOwner) {
                     it.copy(
                         videoUri = uri.toString(),
                         useVideoWallpaper = true,
                         useCustomWallpaper = false,
                         useBuiltinAerials = false,
                     )
-                }
+                } }.onFailure { Actions.toast(context, context.getString(R.string.profile_action_failed)) }
             }
         }
     }
@@ -206,6 +210,7 @@ fun SettingsSheet(
                         onStatusBar = { screen = SettingsScreen.StatusBar },
                         onApps = { screen = SettingsScreen.Apps },
                         onCategories = { screen = SettingsScreen.Categories },
+                        onProfiles = { screen = SettingsScreen.Profiles },
                         onLauncher = { screen = SettingsScreen.Launcher },
                         onAndroidSettings = { Actions.openSystemSettings(context) },
                         onAbout = { screen = SettingsScreen.About },
@@ -245,10 +250,12 @@ fun SettingsSheet(
                             }
                         },
                         onPickPhoto = {
+                            mediaOwner = activeProfileId
                             runCatching { photoPicker.launch(arrayOf("image/*")) }
                                 .onFailure { Actions.toast(context, context.getString(R.string.toast_no_picker)) }
                         },
                         onPickVideo = {
+                            mediaOwner = activeProfileId
                             runCatching { videoPicker.launch(arrayOf("video/*")) }
                                 .onFailure { Actions.toast(context, context.getString(R.string.toast_no_picker)) }
                         },
@@ -288,8 +295,10 @@ fun SettingsSheet(
                     SettingsScreen.About -> AboutScreen(
                         onBack = { screen = SettingsScreen.Main },
                     )
+                    SettingsScreen.Profiles -> ProfilesScreen(store, onSwitched = onDismiss)
                     SettingsScreen.Launcher -> LauncherSettingsSubscreen(
                         config = config,
+                        activeProfileId = activeProfileId,
                         store = store,
                         onBack = { screen = SettingsScreen.Main },
                         onRerunWizard = onRerunWizard,
@@ -311,6 +320,7 @@ private fun MainScreen(
     onStatusBar: () -> Unit,
     onApps: () -> Unit,
     onCategories: () -> Unit,
+    onProfiles: () -> Unit,
     onLauncher: () -> Unit,
     onAndroidSettings: () -> Unit,
     onAbout: () -> Unit,
@@ -343,6 +353,11 @@ private fun MainScreen(
         )
 
         // ---- Appearance: how it looks ----
+        SettingsItem(
+            onClick = onProfiles,
+            headlineContent = { Text(stringResource(R.string.profiles_title)) },
+            supportingContent = { Text(stringResource(R.string.profiles_sub)) },
+        )
         SectionLabel(stringResource(R.string.group_appearance))
         SettingsItem(
             selected = false, onClick = onDisplay,
@@ -788,6 +803,7 @@ private fun SectionAppsDialog(
 @Composable
 private fun LauncherSettingsSubscreen(
     config: LauncherConfig,
+    activeProfileId: String,
     store: ConfigStore,
     onBack: () -> Unit,
     onRerunWizard: () -> Unit,
@@ -796,6 +812,7 @@ private fun LauncherSettingsSubscreen(
     val scope = rememberCoroutineScope()
     var langScreen by remember { mutableStateOf(false) }
     var pendingRestore by remember { mutableStateOf<LauncherConfig?>(null) }
+    var restoreOwner by remember { mutableStateOf(activeProfileId) }
     var undoConfirm by remember { mutableStateOf(false) }
     val canUndo by store.canUndo.collectAsStateWithLifecycle(initialValue = false)
 
@@ -805,6 +822,7 @@ private fun LauncherSettingsSubscreen(
     }
 
     fun reviewSavedBackup() {
+        restoreOwner = activeProfileId
         scope.launch {
             val loaded = withContext(Dispatchers.IO) {
                 runCatching {
@@ -883,7 +901,10 @@ private fun LauncherSettingsSubscreen(
         )
         SettingsItem(
             selected = false,
-            onClick = { runCatching { loadPicker.launch(arrayOf("application/json", "*/*")) }.onFailure { Actions.toast(context, context.getString(R.string.toast_no_picker)) } },
+            onClick = {
+                restoreOwner = activeProfileId
+                runCatching { loadPicker.launch(arrayOf("application/json", "*/*")) }.onFailure { Actions.toast(context, context.getString(R.string.toast_no_picker)) }
+            },
             headlineContent = { Text(stringResource(R.string.item_load_config)) },
             supportingContent = { Text(stringResource(R.string.item_load_config_sub)) },
             leadingContent = { Icon(AppIcons.Folder, contentDescription = null) },
@@ -911,7 +932,7 @@ private fun LauncherSettingsSubscreen(
     pendingRestore?.let { backup ->
         RestorePreviewDialog(backup, onCancel = { pendingRestore = null }, onRestore = { keepWallpaper ->
             scope.launch {
-                runCatching { store.restore(backup, keepWallpaper) }
+                runCatching { store.restore(backup, keepWallpaper, restoreOwner) }
                     .onSuccess {
                         pendingRestore = null
                         Actions.toast(context, context.getString(R.string.toast_config_loaded))

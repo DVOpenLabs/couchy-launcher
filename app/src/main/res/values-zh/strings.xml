@@ -205,4 +205,18 @@
     <string name="restore_notice">恢复将替换布局和偏好设置。下次更改设置前可以撤销。不包含照片文件和视频访问权限；恢复壁纸设置可能启用联网航拍视频。</string>
     <string name="restore_keep_wallpaper">保留此电视当前的壁纸</string>
     <string name="restore_apply">恢复设置</string>
+    <string name="profiles_title">个人配置</string>
+    <string name="profiles_sub">独立的收藏、壁纸和布局</string>
+    <string name="profiles_notice">Google 和流媒体应用账号仍然共享。</string>
+    <string name="profile_home">主页</string>
+    <string name="profile_action_failed">无法更改个人配置，现有设置已保留。</string>
+    <string name="profile_add">添加个人配置</string>
+    <string name="profile_rename">重命名当前配置</string>
+    <string name="profile_delete_named">删除 %1$s</string>
+    <string name="profile_delete_notice">仅删除此配置及其偏好。应用和其他配置仍保留在电视上。</string>
+    <string name="profile_name">配置名称</string>
+    <string name="profile_name_invalid">请使用其他名称，最多 32 个字符。</string>
+    <string name="profile_copy_notice">复制当前配置，准备好后从列表中选择。</string>
+    <string name="profile_easy">简易视图：大图标、标签和更宽间距</string>
+    <string name="profile_delete">删除配置</string>
 </resources>

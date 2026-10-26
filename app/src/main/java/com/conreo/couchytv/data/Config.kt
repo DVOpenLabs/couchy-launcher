@@ -33,6 +33,8 @@ data class LauncherConfig(
     val knownApps: Set<String> = emptySet(),
     val wallpaper: Int = 1, // Aurora
     val useCustomWallpaper: Boolean = false,
+    /** Empty keeps the legacy wallpaper.jpg; new photos use immutable, shared-safe file IDs. */
+    val photoId: String = "",
     /** video wallpaper: persisted content-URI of a local video, looped muted */
     val videoUri: String = "",
     val useVideoWallpaper: Boolean = false,
@@ -93,9 +95,12 @@ private val Context.dataStore by preferencesDataStore(name = "launcher")
 
 class ConfigStore(private val context: Context) {
 
-    val flow: Flow<LauncherConfig> = context.dataStore.data.map { prefs ->
-        ConfigChanges.current(prefs, initialConfig())
+    private fun homeName() = context.getString(R.string.profile_home)
+
+    val state: Flow<LauncherState> = context.dataStore.data.map { prefs ->
+        LauncherState(ConfigChanges.current(prefs, initialConfig()), LocalProfiles.directory(prefs, homeName()))
     }
+    val flow: Flow<LauncherConfig> = state.map { it.config }
 
     val canUndo: Flow<Boolean> = context.dataStore.data.map(ConfigChanges::canUndo)
 
@@ -108,14 +113,15 @@ class ConfigStore(private val context: Context) {
         CategoryCfg("apps", ctx.getString(R.string.cat_apps)),
     )
 
-    suspend fun update(recordUndo: Boolean = true, transform: (LauncherConfig) -> LauncherConfig) {
+    suspend fun update(recordUndo: Boolean = true, expectedProfileId: String? = null, transform: (LauncherConfig) -> LauncherConfig) {
         context.dataStore.edit { prefs ->
+            if (expectedProfileId != null) check(LocalProfiles.directory(prefs, homeName())?.activeId == expectedProfileId)
             val current = ConfigChanges.current(prefs, initialConfig())
             ConfigChanges.update(prefs, current, transform(current), recordUndo)
         }
     }
 
-    suspend fun restore(backup: LauncherConfig, keepWallpaper: Boolean) = update {
+    suspend fun restore(backup: LauncherConfig, keepWallpaper: Boolean, expectedProfileId: String? = null) = update(expectedProfileId = expectedProfileId) {
         ConfigBackup.forRestore(backup, it, keepWallpaper)
     }
 
@@ -123,5 +129,21 @@ class ConfigStore(private val context: Context) {
         var restored = false
         context.dataStore.edit { prefs -> restored = ConfigChanges.undo(prefs, ConfigChanges.current(prefs, initialConfig())) }
         return restored
+    }
+
+    suspend fun createProfile(name: String, easyView: Boolean) {
+        context.dataStore.edit { prefs -> LocalProfiles.create(prefs, ConfigChanges.current(prefs, initialConfig()), homeName(), name, easyView) }
+    }
+
+    suspend fun switchProfile(id: String) {
+        context.dataStore.edit { prefs -> LocalProfiles.switch(prefs, ConfigChanges.current(prefs, initialConfig()), homeName(), id) }
+    }
+
+    suspend fun renameProfile(id: String, name: String) {
+        context.dataStore.edit { prefs -> LocalProfiles.rename(prefs, homeName(), id, name) }
+    }
+
+    suspend fun deleteProfile(id: String) {
+        context.dataStore.edit { prefs -> LocalProfiles.delete(prefs, homeName(), id) }
     }
 }

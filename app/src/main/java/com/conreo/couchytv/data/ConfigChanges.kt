@@ -14,6 +14,12 @@ internal object ConfigChanges {
 
     fun current(prefs: Preferences, fallback: LauncherConfig): LauncherConfig = decode(prefs[CONFIG]) ?: fallback
     fun canUndo(prefs: Preferences) = decode(prefs[UNDO]) != null
+    fun undoConfig(prefs: Preferences): LauncherConfig? = decode(prefs[UNDO])
+
+    fun replaceForProfile(prefs: MutablePreferences, config: LauncherConfig, undo: LauncherConfig?) {
+        prefs[CONFIG] = json.encodeToString(config)
+        if (undo == null) prefs.remove(UNDO) else prefs[UNDO] = json.encodeToString(undo)
+    }
 
     fun update(prefs: MutablePreferences, current: LauncherConfig, next: LauncherConfig, recordUndo: Boolean) {
         if (current == next) return

@@ -191,4 +191,18 @@
     <string name="restore_notice">Herstellen vervangt je indeling en voorkeuren. Je kunt dit tot de volgende wijziging ongedaan maken. Foto\'s en videotoegang zijn niet inbegrepen; de achtergrond herstellen kan optionele luchtvideo\'s streamen.</string>
     <string name="restore_keep_wallpaper">Huidige achtergrond van deze tv behouden</string>
     <string name="restore_apply">Instellingen herstellen</string>
+    <string name="profiles_title">Profielen</string>
+    <string name="profiles_sub">Eigen favorieten, achtergrond en indeling</string>
+    <string name="profiles_notice">Google- en streamingaccounts blijven gedeeld.</string>
+    <string name="profile_home">Thuis</string>
+    <string name="profile_action_failed">Profielen konden niet worden gewijzigd. Instellingen blijven bewaard.</string>
+    <string name="profile_add">Profiel toevoegen</string>
+    <string name="profile_rename">Huidig profiel hernoemen</string>
+    <string name="profile_delete_named">%1$s verwijderen</string>
+    <string name="profile_delete_notice">Alleen dit profiel en de voorkeuren worden verwijderd. Apps en andere profielen blijven op de tv.</string>
+    <string name="profile_name">Profielnaam</string>
+    <string name="profile_name_invalid">Gebruik een andere naam van maximaal 32 tekens.</string>
+    <string name="profile_copy_notice">Begint als kopie van dit profiel. Selecteer het daarna in de lijst.</string>
+    <string name="profile_easy">Eenvoudige weergave: grotere pictogrammen, labels en meer ruimte</string>
+    <string name="profile_delete">Profiel verwijderen</string>
 </resources>

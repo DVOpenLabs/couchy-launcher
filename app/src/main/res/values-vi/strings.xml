@@ -191,4 +191,18 @@
     <string name="restore_notice">Khôi phục thay thế bố cục và tùy chọn của bạn. Bạn có thể hoàn tác trước thay đổi tiếp theo. Không bao gồm ảnh và quyền truy cập video; khôi phục hình nền có thể bật truyền video trên không tùy chọn.</string>
     <string name="restore_keep_wallpaper">Giữ hình nền hiện tại của TV</string>
     <string name="restore_apply">Khôi phục cài đặt</string>
+    <string name="profiles_title">Hồ sơ</string>
+    <string name="profiles_sub">Ứng dụng yêu thích, hình nền và bố cục riêng</string>
+    <string name="profiles_notice">Tài khoản Google và ứng dụng phát trực tuyến vẫn dùng chung.</string>
+    <string name="profile_home">Nhà</string>
+    <string name="profile_action_failed">Không thể đổi hồ sơ. Cài đặt hiện tại được giữ lại.</string>
+    <string name="profile_add">Thêm hồ sơ</string>
+    <string name="profile_rename">Đổi tên hồ sơ hiện tại</string>
+    <string name="profile_delete_named">Xóa %1$s</string>
+    <string name="profile_delete_notice">Chỉ xóa hồ sơ này và tùy chọn đã lưu. Ứng dụng và hồ sơ khác vẫn còn trên TV.</string>
+    <string name="profile_name">Tên hồ sơ</string>
+    <string name="profile_name_invalid">Dùng tên khác, tối đa 32 ký tự.</string>
+    <string name="profile_copy_notice">Sao chép hồ sơ hiện tại. Chọn từ danh sách khi đã sẵn sàng.</string>
+    <string name="profile_easy">Chế độ dễ xem: biểu tượng lớn, nhãn và khoảng cách rộng</string>
+    <string name="profile_delete">Xóa hồ sơ</string>
 </resources>

@@ -191,4 +191,18 @@
     <string name="restore_notice">تحل الاستعادة محل التخطيط والتفضيلات. يمكنك التراجع قبل التغيير التالي. لا تتضمن الصور أو أذونات الفيديو؛ قد تؤدي استعادة الخلفية إلى تشغيل بث المشاهد الجوية الاختياري.</string>
     <string name="restore_keep_wallpaper">الاحتفاظ بخلفية هذا التلفاز الحالية</string>
     <string name="restore_apply">استعادة الإعدادات</string>
+    <string name="profiles_title">الملفات الشخصية</string>
+    <string name="profiles_sub">مفضلة وخلفية وتخطيط لكل شخص</string>
+    <string name="profiles_notice">تبقى حسابات Google وتطبيقات البث مشتركة.</string>
+    <string name="profile_home">الرئيسية</string>
+    <string name="profile_action_failed">تعذر تغيير الملفات الشخصية. تم الاحتفاظ بالإعدادات الحالية.</string>
+    <string name="profile_add">إضافة ملف شخصي</string>
+    <string name="profile_rename">تغيير اسم الملف الحالي</string>
+    <string name="profile_delete_named">حذف %1$s</string>
+    <string name="profile_delete_notice">سيتم حذف هذا الملف وتفضيلاته فقط. تبقى التطبيقات والملفات الأخرى على التلفاز.</string>
+    <string name="profile_name">اسم الملف الشخصي</string>
+    <string name="profile_name_invalid">استخدم اسماً آخر لا يتجاوز 32 حرفاً.</string>
+    <string name="profile_copy_notice">يبدأ بنسخة من الملف الحالي. اختره من القائمة عندما يكون جاهزاً.</string>
+    <string name="profile_easy">عرض مبسط: أيقونات أكبر وتسميات ومسافات أوسع</string>
+    <string name="profile_delete">حذف الملف الشخصي</string>
 </resources>

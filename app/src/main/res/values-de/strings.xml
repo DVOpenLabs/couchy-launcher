@@ -191,4 +191,18 @@
     <string name="restore_notice">Die Wiederherstellung ersetzt Layout und Einstellungen. Bis zur nächsten Einstellungsänderung können Sie sie rückgängig machen. Fotodateien und Videozugriffe sind nicht enthalten; die Wiederherstellung des Hintergrunds kann optionale Luftaufnahmen streamen.</string>
     <string name="restore_keep_wallpaper">Aktuellen Hintergrund dieses Fernsehers behalten</string>
     <string name="restore_apply">Einstellungen wiederherstellen</string>
+    <string name="profiles_title">Profile</string>
+    <string name="profiles_sub">Eigene Favoriten, Hintergründe und Anordnung</string>
+    <string name="profiles_notice">Google- und Streaming-Konten bleiben gemeinsam genutzt.</string>
+    <string name="profile_home">Zuhause</string>
+    <string name="profile_action_failed">Profile konnten nicht geändert werden. Einstellungen bleiben erhalten.</string>
+    <string name="profile_add">Profil hinzufügen</string>
+    <string name="profile_rename">Aktuelles Profil umbenennen</string>
+    <string name="profile_delete_named">%1$s löschen</string>
+    <string name="profile_delete_notice">Nur dieses Profil und seine Einstellungen werden entfernt. Apps und andere Profile bleiben auf dem Fernseher.</string>
+    <string name="profile_name">Profilname</string>
+    <string name="profile_name_invalid">Anderen Namen mit höchstens 32 Zeichen verwenden.</string>
+    <string name="profile_copy_notice">Kopiert das aktuelle Profil. Anschließend in der Liste auswählen.</string>
+    <string name="profile_easy">Einfache Ansicht: größere Symbole, Beschriftung und mehr Abstand</string>
+    <string name="profile_delete">Profil löschen</string>
 </resources>

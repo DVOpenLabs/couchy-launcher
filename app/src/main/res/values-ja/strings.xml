@@ -191,4 +191,18 @@
     <string name="restore_notice">復元するとレイアウトと設定が置き換わります。次の設定変更まで元に戻せます。写真や動画のアクセス権は含まれません。壁紙設定を復元すると任意の空撮動画ストリーミングが有効になる場合があります。</string>
     <string name="restore_keep_wallpaper">このテレビの現在の壁紙を維持</string>
     <string name="restore_apply">設定を復元</string>
+    <string name="profiles_title">プロフィール</string>
+    <string name="profiles_sub">個別のお気に入り、壁紙、レイアウト</string>
+    <string name="profiles_notice">Google と配信アプリのアカウントは共有されます。</string>
+    <string name="profile_home">ホーム</string>
+    <string name="profile_action_failed">プロフィールを変更できませんでした。設定は保持されます。</string>
+    <string name="profile_add">プロフィールを追加</string>
+    <string name="profile_rename">現在のプロフィール名を変更</string>
+    <string name="profile_delete_named">%1$s を削除</string>
+    <string name="profile_delete_notice">このプロフィールと設定のみ削除します。アプリと他のプロフィールはテレビに残ります。</string>
+    <string name="profile_name">プロフィール名</string>
+    <string name="profile_name_invalid">32 文字以内の別の名前を入力してください。</string>
+    <string name="profile_copy_notice">現在の設定をコピーします。準備できたら一覧から選択してください。</string>
+    <string name="profile_easy">かんたん表示：大きなアイコン、ラベル、広い間隔</string>
+    <string name="profile_delete">プロフィールを削除</string>
 </resources>

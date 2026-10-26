@@ -73,6 +73,7 @@ object ConfigBackup {
         require(config.videoSpeed in 0..3 && config.builtinSource in 0..128)
         require(config.language.length <= 35 && config.language.all { it.isLetterOrDigit() || it == '-' })
         require(config.videoUri.length <= 4096 && config.vpnApp.length <= 255)
+        require(config.photoId.isEmpty() || config.photoId.matches(Regex("[a-f0-9-]{36}")))
         require(config.hidden.size <= 2048 && config.knownApps.size <= 2048 && config.sections.size <= 2048 && config.order.size <= 32)
         (config.hidden + config.knownApps + config.sections.keys + config.order.values.flatten()).forEach { require(validText(it, 255)) }
         config.sections.values.forEach { ids -> require(ids.size <= 32); ids.forEach { require(validText(it, 128)) } }
@@ -86,7 +87,7 @@ object ConfigBackup {
         validate(backup)
         val restored = backup.copy(knownApps = current.knownApps, setupDone = current.setupDone)
         return if (!keepWallpaper) restored else restored.copy(
-            wallpaper = current.wallpaper, useCustomWallpaper = current.useCustomWallpaper,
+            wallpaper = current.wallpaper, useCustomWallpaper = current.useCustomWallpaper, photoId = current.photoId,
             videoUri = current.videoUri, useVideoWallpaper = current.useVideoWallpaper,
             useBuiltinAerials = current.useBuiltinAerials, builtinSource = current.builtinSource,
             videoSpeed = current.videoSpeed, scrimMode = current.scrimMode,

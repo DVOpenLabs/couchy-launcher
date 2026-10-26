@@ -191,4 +191,18 @@
     <string name="restore_notice">Geri yükleme düzeninizi ve tercihlerinizi değiştirir. Bir sonraki ayar değişikliğine kadar geri alabilirsiniz. Fotoğraflar ve video erişimi dahil değildir; duvar kağıdı ayarlarını geri yüklemek isteğe bağlı hava görüntüsü akışını açabilir.</string>
     <string name="restore_keep_wallpaper">Bu TV\'nin mevcut duvar kağıdını koru</string>
     <string name="restore_apply">Ayarları geri yükle</string>
+    <string name="profiles_title">Profiller</string>
+    <string name="profiles_sub">Kişisel favoriler, duvar kâğıdı ve düzen</string>
+    <string name="profiles_notice">Google ve yayın uygulaması hesapları ortak kalır.</string>
+    <string name="profile_home">Ev</string>
+    <string name="profile_action_failed">Profiller değiştirilemedi. Mevcut ayarlar korundu.</string>
+    <string name="profile_add">Profil ekle</string>
+    <string name="profile_rename">Geçerli profili yeniden adlandır</string>
+    <string name="profile_delete_named">%1$s profilini sil</string>
+    <string name="profile_delete_notice">Yalnızca bu profil ve tercihleri kaldırılır. Uygulamalar ve diğer profiller TV üzerinde kalır.</string>
+    <string name="profile_name">Profil adı</string>
+    <string name="profile_name_invalid">En fazla 32 karakterlik farklı bir ad kullanın.</string>
+    <string name="profile_copy_notice">Geçerli profilin kopyasıyla başlar. Hazır olduğunda listeden seçin.</string>
+    <string name="profile_easy">Kolay görünüm: büyük simgeler, etiketler ve geniş aralıklar</string>
+    <string name="profile_delete">Profili sil</string>
 </resources>

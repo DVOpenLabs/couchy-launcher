@@ -191,4 +191,18 @@
     <string name="restore_notice">बहाल करने पर लेआउट और प्राथमिकताएँ बदल जाएँगी। अगले सेटिंग बदलाव तक इसे वापस ले सकते हैं। फ़ोटो और वीडियो की अनुमति शामिल नहीं हैं; वॉलपेपर सेटिंग बहाल करने से वैकल्पिक हवाई वीडियो स्ट्रीमिंग चालू हो सकती है।</string>
     <string name="restore_keep_wallpaper">इस टीवी का मौजूदा वॉलपेपर रखें</string>
     <string name="restore_apply">सेटिंग बहाल करें</string>
+    <string name="profiles_title">प्रोफ़ाइल</string>
+    <string name="profiles_sub">अपने पसंदीदा ऐप, वॉलपेपर और लेआउट</string>
+    <string name="profiles_notice">Google और स्ट्रीमिंग ऐप के खाते साझा रहते हैं।</string>
+    <string name="profile_home">होम</string>
+    <string name="profile_action_failed">प्रोफ़ाइल नहीं बदली जा सकी। मौजूदा सेटिंग सुरक्षित हैं।</string>
+    <string name="profile_add">प्रोफ़ाइल जोड़ें</string>
+    <string name="profile_rename">मौजूदा प्रोफ़ाइल का नाम बदलें</string>
+    <string name="profile_delete_named">%1$s हटाएँ</string>
+    <string name="profile_delete_notice">केवल यह प्रोफ़ाइल और इसकी सेटिंग हटेंगी। ऐप और अन्य प्रोफ़ाइल टीवी पर रहेंगी।</string>
+    <string name="profile_name">प्रोफ़ाइल का नाम</string>
+    <string name="profile_name_invalid">32 अक्षरों तक का कोई दूसरा नाम रखें।</string>
+    <string name="profile_copy_notice">मौजूदा प्रोफ़ाइल की कॉपी बनती है। तैयार होने पर सूची से चुनें।</string>
+    <string name="profile_easy">आसान दृश्य: बड़े आइकन, नाम और अधिक अंतर</string>
+    <string name="profile_delete">प्रोफ़ाइल हटाएँ</string>
 </resources>
